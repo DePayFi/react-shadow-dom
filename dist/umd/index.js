@@ -14,10 +14,10 @@
   function getOutsideContainer(element) {
       return element.getElementsByClassName(outsideContainerClass)[0];
   }
-  function createOutsideContainer({ document, element, styles }) {
+  function createOutsideContainer({ document, element, style }) {
       const container = document.createElement('div');
       container.setAttribute('class', outsideContainerClass);
-      container.setAttribute('style', styles.trim());
+      container.setAttribute('style', style);
       element.appendChild(container);
       return container;
   }
@@ -37,11 +37,12 @@
   }
 
   const insideContainerClass = 'ReactShadowDOMInsideContainer';
-  function createInsideContainer(document, shadow) {
-      const insideContainer = document.createElement('div');
-      insideContainer.setAttribute('class', insideContainerClass);
-      shadow.appendChild(insideContainer);
-      return insideContainer;
+  function createInsideContainer({ document, shadow, style }) {
+      const container = document.createElement('div');
+      container.setAttribute('class', insideContainerClass);
+      container.setAttribute('style', style);
+      shadow.appendChild(container);
+      return container;
   }
 
   function createShadow(container) {
@@ -55,11 +56,15 @@
       return shadow;
   }
 
-  function ReactShadowDOM({ document, element, content, outsideStyles = '', }) {
+  function trimStyle(style) {
+      return style.replace(/\s*[\r\n]\s*/g, '');
+  }
+
+  function ReactShadowDOM({ document, element, content, outsideStyle = '', insideStyle = '', }) {
       cleanup(element);
-      const outsideContainer = createOutsideContainer({ document, element, styles: outsideStyles });
+      const outsideContainer = createOutsideContainer({ document, element, style: trimStyle(outsideStyle) });
       const shadow = createShadow(outsideContainer);
-      const insideContainer = createInsideContainer(document, shadow);
+      const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle) });
       ReactDOM__default['default'].render(content, insideContainer);
       return content;
   }

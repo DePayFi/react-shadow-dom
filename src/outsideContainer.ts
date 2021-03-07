@@ -7,17 +7,17 @@ export function getOutsideContainer(element: HTMLElement): Element {
 interface createOutsideContainerParameters {
   document: Document,
   element: HTMLElement,
-  styles: string
+  style: string
 }
 
 export function createOutsideContainer({
   document,
   element,
-  styles
+  style
 }: createOutsideContainerParameters): Element {
   const container = document.createElement('div')
   container.setAttribute('class', outsideContainerClass)
-  container.setAttribute('style', styles.trim())
+  container.setAttribute('style', style)
   element.appendChild(container)
   return container
 }

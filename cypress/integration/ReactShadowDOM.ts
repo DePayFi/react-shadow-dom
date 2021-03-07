@@ -92,12 +92,38 @@ describe('ReactShadowDOM', () => {
           document,
           element: document.body,
           content: React.createElement('h1', {}, 'I have been rendered into a shadow dom!'),
-          outsideStyles: `
+          outsideStyle: `
             border: 1px solid red;
+            color: black;
           `
         })
 
-        cy.get('.ReactShadowDOMOutsideContainer').invoke('attr', 'style').should('equal', 'border: 1px solid red;')
+        cy.get('.ReactShadowDOMOutsideContainer').invoke('attr', 'style').should('equal', 'border: 1px solid red;color: black;')
+      })
+    })
+  })
+
+  it('passes inside styles to the inside container (also removes whitespace)', () => {
+  
+    cy.visit('cypress/test.html').then((contentWindow) => {
+      cy.document().then((document) => {
+
+        ReactShadowDOM({
+          document,
+          element: document.body,
+          content: React.createElement('h1', {}, 'I have been rendered into a shadow dom!'),
+          insideStyle: `
+            background: blue;
+            color: white;
+          `
+        })
+
+        cy.get('.ReactShadowDOMOutsideContainer').should(element => {
+          const [container] = element.get()
+          expect(
+            container.shadowRoot.querySelector('.ReactShadowDOMInsideContainer').getAttribute('style')
+          ).to.equal('background: blue;color: white;')
+        })
       })
     })
   })  

@@ -2,7 +2,7 @@ export declare function getOutsideContainer(element: HTMLElement): Element;
 interface createOutsideContainerParameters {
     document: Document;
     element: HTMLElement;
-    styles: string;
+    style: string;
 }
-export declare function createOutsideContainer({ document, element, styles }: createOutsideContainerParameters): Element;
+export declare function createOutsideContainer({ document, element, style }: createOutsideContainerParameters): Element;
 export {};
