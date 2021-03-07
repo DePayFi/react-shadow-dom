@@ -10,20 +10,37 @@
 
   var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
 
+  const outsideContainerClass = 'ReactShadowDOMOutsideContainer';
+  function getOutsideContainer(element) {
+      return element.getElementsByClassName(outsideContainerClass)[0];
+  }
+  function createOutsideContainer(document, element) {
+      const container = document.createElement('div');
+      container.setAttribute('class', outsideContainerClass);
+      element.appendChild(container);
+      return container;
+  }
+
+  function cleanup(element) {
+      const outsideContainer = getOutsideContainer(element);
+      if (outsideContainer && outsideContainer.shadowRoot) {
+          const shadowRoot = outsideContainer.shadowRoot;
+          if (shadowRoot) {
+              const insideContainer = shadowRoot.childNodes[0];
+              if (insideContainer) {
+                  ReactDOM__default['default'].unmountComponentAtNode(insideContainer);
+              }
+          }
+          outsideContainer.remove();
+      }
+  }
+
   const insideContainerClass = 'ReactShadowDOMInsideContainer';
   function createInsideContainer(document, shadow) {
       const insideContainer = document.createElement('div');
       insideContainer.setAttribute('class', insideContainerClass);
       shadow.appendChild(insideContainer);
       return insideContainer;
-  }
-
-  const outsideContainerClass = 'ReactShadowDOMOutsideContainer';
-  function createOutsideContainer(document, element) {
-      const container = document.createElement('div');
-      container.setAttribute('class', outsideContainerClass);
-      element.appendChild(container);
-      return container;
   }
 
   function createShadow(container) {
@@ -37,7 +54,8 @@
       return shadow;
   }
 
-  function ReactShadowDOM({ document, element, content, styles = '' }) {
+  function ReactShadowDOM({ document, element, content }) {
+      cleanup(element);
       const outsideContainer = createOutsideContainer(document, element);
       const shadow = createShadow(outsideContainer);
       const insideContainer = createInsideContainer(document, shadow);

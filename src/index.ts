@@ -1,4 +1,4 @@
-import {ReactElement} from 'react'
+import { ReactElement } from 'react'
 import ReactDOM from 'react-dom'
 import { cleanup } from './cleanup'
 import { createInsideContainer } from './insideContainer'
@@ -6,17 +6,15 @@ import { createOutsideContainer } from './outsideContainer'
 import { createShadow } from './shadow'
 
 interface ReactShadowDOMParameters {
-  document: Document,
-  element: HTMLElement,
-  content: ReactElement,
-  styles?: string
+  document: Document
+  element: HTMLElement
+  content: ReactElement
 }
 
 export default function ReactShadowDOM({
   document,
   element,
   content,
-  styles = ''
 }: ReactShadowDOMParameters): ReactElement {
   cleanup(element)
   const outsideContainer = createOutsideContainer(document, element)
@@ -27,7 +25,6 @@ export default function ReactShadowDOM({
   ReactDOM.render(content, insideContainer)
   return content
 }
-
 
 // import ReactDOM from 'react-dom'
 

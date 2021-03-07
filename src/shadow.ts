@@ -1,7 +1,4 @@
-export function createShadow(
-  container: Element
-): ShadowRoot {
-  
+export function createShadow(container: Element): ShadowRoot {
   let shadow
 
   if (container.shadowRoot) {
