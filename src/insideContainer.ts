@@ -1,15 +1,15 @@
 const insideContainerClass = 'ReactShadowDOMInsideContainer'
 
 interface createInsideContainerParameters {
-  document: Document,
-  shadow: ShadowRoot,
+  document: Document
+  shadow: ShadowRoot
   style: string
 }
 
 export function createInsideContainer({
   document,
   shadow,
-  style
+  style,
 }: createInsideContainerParameters): Element {
   const container = document.createElement('div')
 

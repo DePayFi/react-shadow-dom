@@ -5,15 +5,15 @@ export function getOutsideContainer(element: HTMLElement): Element {
 }
 
 interface createOutsideContainerParameters {
-  document: Document,
-  element: HTMLElement,
+  document: Document
+  element: HTMLElement
   style: string
 }
 
 export function createOutsideContainer({
   document,
   element,
-  style
+  style,
 }: createOutsideContainerParameters): Element {
   const container = document.createElement('div')
   container.setAttribute('class', outsideContainerClass)

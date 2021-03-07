@@ -4,5 +4,5 @@ interface createOutsideContainerParameters {
     element: HTMLElement;
     style: string;
 }
-export declare function createOutsideContainer({ document, element, style }: createOutsideContainerParameters): Element;
+export declare function createOutsideContainer({ document, element, style, }: createOutsideContainerParameters): Element;
 export {};

@@ -22,7 +22,11 @@ export default function ReactShadowDOM({
   insideStyle = '',
 }: ReactShadowDOMParameters): ReactElement {
   cleanup(element)
-  const outsideContainer = createOutsideContainer({ document, element, style: trimStyle(outsideStyle) })
+  const outsideContainer = createOutsideContainer({
+    document,
+    element,
+    style: trimStyle(outsideStyle),
+  })
   const shadow = createShadow(outsideContainer)
   const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle) })
   ReactDOM.render(content, insideContainer)

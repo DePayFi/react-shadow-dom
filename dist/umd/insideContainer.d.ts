@@ -3,5 +3,5 @@ interface createInsideContainerParameters {
     shadow: ShadowRoot;
     style: string;
 }
-export declare function createInsideContainer({ document, shadow, style }: createInsideContainerParameters): Element;
+export declare function createInsideContainer({ document, shadow, style, }: createInsideContainerParameters): Element;
 export {};
