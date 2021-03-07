@@ -14,9 +14,10 @@
   function getOutsideContainer(element) {
       return element.getElementsByClassName(outsideContainerClass)[0];
   }
-  function createOutsideContainer(document, element) {
+  function createOutsideContainer({ document, element, styles }) {
       const container = document.createElement('div');
       container.setAttribute('class', outsideContainerClass);
+      container.setAttribute('style', styles.trim());
       element.appendChild(container);
       return container;
   }
@@ -54,9 +55,9 @@
       return shadow;
   }
 
-  function ReactShadowDOM({ document, element, content }) {
+  function ReactShadowDOM({ document, element, content, outsideStyles = '', }) {
       cleanup(element);
-      const outsideContainer = createOutsideContainer(document, element);
+      const outsideContainer = createOutsideContainer({ document, element, styles: outsideStyles });
       const shadow = createShadow(outsideContainer);
       const insideContainer = createInsideContainer(document, shadow);
       ReactDOM__default['default'].render(content, insideContainer);

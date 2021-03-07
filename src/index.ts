@@ -9,19 +9,19 @@ interface ReactShadowDOMParameters {
   document: Document
   element: HTMLElement
   content: ReactElement
+  outsideStyles?: string
 }
 
 export default function ReactShadowDOM({
   document,
   element,
   content,
+  outsideStyles = '',
 }: ReactShadowDOMParameters): ReactElement {
   cleanup(element)
-  const outsideContainer = createOutsideContainer(document, element)
+  const outsideContainer = createOutsideContainer({ document, element, styles: outsideStyles })
   const shadow = createShadow(outsideContainer)
   const insideContainer = createInsideContainer(document, shadow)
-  // injectOutsideStyles(document)
-  // injectInsideStyles(document, shadow, styles)
   ReactDOM.render(content, insideContainer)
   return content
 }

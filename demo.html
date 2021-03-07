@@ -15,7 +15,15 @@
       const ReactShadowDOM = window.ReactShadowDOM;
       const element = document.getElementsByClassName('ReactShadowDOM')[0];
       const content = React.createElement('h1', {}, "I'm in a ShadowDOM");
-      ReactShadowDOM({ document, element, content });
+      const outsideStyles = `
+        border: 1px solid red;
+      `
+      ReactShadowDOM({
+        document,
+        element,
+        content,
+        outsideStyles: outsideStyles
+      });
     </script>
   </body>
 </html>

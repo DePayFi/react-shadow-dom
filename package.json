@@ -20,7 +20,7 @@
     "test:integration": "yarn cypress run",
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch --no-cache",
-    "test": "yarn test:units && yarn test:integration"
+    "test": "yarn test:integration"
   },
   "repository": "git@github.com:DePayFi/depay-react-shadow-dom.git",
   "keywords": [

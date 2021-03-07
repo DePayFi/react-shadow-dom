@@ -82,4 +82,23 @@ describe('ReactShadowDOM', () => {
       })
     })
   })
+
+  it('passes outside styles to the outside container (also removes whitespace)', () => {
+  
+    cy.visit('cypress/test.html').then((contentWindow) => {
+      cy.document().then((document) => {
+
+        ReactShadowDOM({
+          document,
+          element: document.body,
+          content: React.createElement('h1', {}, 'I have been rendered into a shadow dom!'),
+          outsideStyles: `
+            border: 1px solid red;
+          `
+        })
+
+        cy.get('.ReactShadowDOMOutsideContainer').invoke('attr', 'style').should('equal', 'border: 1px solid red;')
+      })
+    })
+  })  
 })
