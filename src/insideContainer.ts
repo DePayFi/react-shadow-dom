@@ -11,8 +11,8 @@ export function createInsideContainer({
   shadow,
   style,
 }: createInsideContainerParameters): Element {
-  const styleElement = document.createElement('style');
-  styleElement.type = 'text/css';
+  const styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
   styleElement.appendChild(document.createTextNode(style))
   shadow.appendChild(styleElement)
 
