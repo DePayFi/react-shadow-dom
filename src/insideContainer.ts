@@ -11,10 +11,13 @@ export function createInsideContainer({
   shadow,
   style,
 }: createInsideContainerParameters): Element {
-  const container = document.createElement('div')
+  const styleElement = document.createElement('style');
+  styleElement.type = 'text/css';
+  styleElement.appendChild(document.createTextNode(style))
+  shadow.appendChild(styleElement)
 
+  const container = document.createElement('div')
   container.setAttribute('class', insideContainerClass)
-  container.setAttribute('style', style)
   shadow.appendChild(container)
 
   return container

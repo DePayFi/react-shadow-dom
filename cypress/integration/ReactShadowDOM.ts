@@ -113,16 +113,18 @@ describe('ReactShadowDOM', () => {
           element: document.body,
           content: React.createElement('h1', {}, 'I have been rendered into a shadow dom!'),
           insideStyle: `
-            background: blue;
-            color: white;
+            .ReactShadowDOMInsideContainer {
+              background: blue;
+              color: white;
+            }
           `
         })
 
         cy.get('.ReactShadowDOMOutsideContainer').should(element => {
           const [container] = element.get()
           expect(
-            container.shadowRoot.querySelector('.ReactShadowDOMInsideContainer').getAttribute('style')
-          ).to.equal('background: blue;color: white;')
+            container.shadowRoot.querySelector('style').innerHTML
+          ).to.equal('.ReactShadowDOMInsideContainer {background: blue;color: white;}')
         })
       })
     })

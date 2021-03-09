@@ -1,3 +1,5 @@
+
+(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['react-dom'], factory) :
@@ -36,9 +38,12 @@
 
   const insideContainerClass = 'ReactShadowDOMInsideContainer';
   function createInsideContainer({ document, shadow, style, }) {
+      const styleElement = document.createElement('style');
+      styleElement.type = 'text/css';
+      styleElement.appendChild(document.createTextNode(style));
+      shadow.appendChild(styleElement);
       const container = document.createElement('div');
       container.setAttribute('class', insideContainerClass);
-      container.setAttribute('style', style);
       shadow.appendChild(container);
       return container;
   }
