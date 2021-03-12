@@ -23,6 +23,36 @@ ReactShadowDOM({
 The function `ReactShadowDOM` renders a react compontent (`content`) into an `insideContainer` that lives inside a shadowRoot of the `outsideContainer`
 target element (`element`) within a given document (`document`) while also applying `insideStyle` to the `insideContainer` and `outsideStyle` to the `outsideContainer`.
 
+### Styles
+
+While `outsideStyle` is applied to the outside container directly:
+```
+outsideStyle: `
+  border: 1px solid red;
+  color: black;
+`
+```
+```
+<div class="ReactShadowDOMOutsideContainer" style="border: 1px solid red;color: black;"></div>
+```
+
+`insideStyle` is wrapped in a style tag and prepend to the shadowRoot:
+```
+insideStyle: `
+  .ReactShadowDOMInsideContainer {
+    background: blue;
+    color: white;
+  }
+`
+```
+```
+#shadow-root
+  <style type="text/css">.ReactShadowDOMInsideContainer {background: blue;color: white;}</style>
+  <div class="ReactShadowDOMInsideContainer"><h1>I'm in a ShadowDOM</h1></div>
+```
+
+wich allows you to style all elements and classes within the shadowRoot.
+
 ## Development
 
 ### Get started
