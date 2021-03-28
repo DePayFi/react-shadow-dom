@@ -2,7 +2,7 @@
   "name": "depay-react-shadow-dom",
   "moduleName": "ReactShadowDOM",
   "version": "1.0.3",
-  "description": "A utility to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
+  "description": "A library to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
   "main": "./dist/umd/index.js",
   "module": "./dist/umd/index.js",
   "types": "./dist/index.d.ts",
