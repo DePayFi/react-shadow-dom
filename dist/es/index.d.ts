@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 interface ReactShadowDOMParameters {
     document: Document;
     element: HTMLElement;
-    content: ReactElement;
+    content: any;
     outsideStyle?: string;
     insideStyle?: string;
 }

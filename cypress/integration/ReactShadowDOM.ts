@@ -25,6 +25,35 @@ describe('ReactShadowDOM', () => {
     })
   })
 
+  it('passes the container to the content if content is a function', ()=>{
+    cy.visit('cypress/test.html').then((contentWindow) => {
+      cy.document().then((document) => {
+
+        let reactShadowDomContainerForContent;
+
+        ReactShadowDOM({
+          document,
+          element: document.body,
+          content: (container)=>{
+            reactShadowDomContainerForContent = container
+            return React.createElement('h1', {}, 'I have been rendered into a shadow dom!')
+          }
+        })
+        
+        cy.get('.ReactShadowDOMOutsideContainer').should(element => {
+          const [container] = element.get()
+          expect(
+            container.shadowRoot.querySelector('.ReactShadowDOMInsideContainer').querySelector('h1').innerHTML
+          ).to.equal('I have been rendered into a shadow dom!')
+
+          expect(
+            container.shadowRoot.querySelector('.ReactShadowDOMInsideContainer')
+          ).to.equal(reactShadowDomContainerForContent)
+        })
+      })
+    })
+  })
+
   it('renders content a shadow dom only once into the same element', () => {
   
     cy.visit('cypress/test.html').then((contentWindow) => {

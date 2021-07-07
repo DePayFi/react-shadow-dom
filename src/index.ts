@@ -9,7 +9,7 @@ import { trimStyle } from './trimStyle'
 interface ReactShadowDOMParameters {
   document: Document
   element: HTMLElement
-  content: ReactElement
+  content: any
   outsideStyle?: string
   insideStyle?: string
 }
@@ -29,6 +29,9 @@ export default function ReactShadowDOM({
   })
   const shadow = createShadow(outsideContainer)
   const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle) })
+  if (typeof content === 'function') {
+    content = content(insideContainer)
+  }
   ReactDOM.render(content, insideContainer)
   return content
 }

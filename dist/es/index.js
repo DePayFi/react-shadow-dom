@@ -28,10 +28,12 @@ function cleanup(element) {
 
 const insideContainerClass = 'ReactShadowDOMInsideContainer';
 function createInsideContainer({ document, shadow, style, }) {
-    const styleElement = document.createElement('style');
-    styleElement.type = 'text/css';
-    styleElement.appendChild(document.createTextNode(style));
-    shadow.appendChild(styleElement);
+    if (style && style.length) {
+        const styleElement = document.createElement('style');
+        styleElement.type = 'text/css';
+        styleElement.appendChild(document.createTextNode(style));
+        shadow.appendChild(styleElement);
+    }
     const container = document.createElement('div');
     container.setAttribute('class', insideContainerClass);
     shadow.appendChild(container);
@@ -62,6 +64,9 @@ function ReactShadowDOM({ document, element, content, outsideStyle = '', insideS
     });
     const shadow = createShadow(outsideContainer);
     const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle) });
+    if (typeof content === 'function') {
+        content = content(insideContainer);
+    }
     ReactDOM.render(content, insideContainer);
     return content;
 }
