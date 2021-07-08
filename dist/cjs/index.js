@@ -10,12 +10,7 @@ var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
 
 const insideContainerClass = 'ReactShadowDOMInsideContainer';
 
-function createInsideContainer({
-  document,
-  shadow,
-  style,
-}) {
-  
+function createInsideContainer({ document, shadow, style }) {
   if (style && style.length) {
     const styleElement = document.createElement('style');
     styleElement.type = 'text/css';
@@ -36,11 +31,7 @@ function getOutsideContainer(element) {
   return element.getElementsByClassName(outsideContainerClass)[0]
 }
 
-function createOutsideContainer({
-  document,
-  element,
-  style,
-}) {
+function createOutsideContainer({ document, element, style }) {
   const container = document.createElement('div');
   container.setAttribute('class', outsideContainerClass);
   container.setAttribute('style', style);
@@ -49,7 +40,6 @@ function createOutsideContainer({
 }
 
 function createShadow(container) {
-  
   let shadow;
 
   if (container.shadowRoot) {
@@ -70,45 +60,38 @@ function unmount(element) {
 
   if (outsideContainer && outsideContainer.shadowRoot) {
     const shadowRoot = outsideContainer.shadowRoot;
-    
+
     if (shadowRoot) {
       const insideContainer = shadowRoot.childNodes[0];
       if (insideContainer) {
         ReactDOM__default['default'].unmountComponentAtNode(insideContainer);
       }
     }
-    
+
     outsideContainer.remove();
   }
 }
 
-function ReactShadowDOM ({
-  document,
-  element,
-  content,
-  outsideStyle = '',
-  insideStyle = '',
-}) {
-
+function ReactShadowDOM({ document, element, content, outsideStyle = '', insideStyle = '' }) {
   unmount(element);
-  
+
   const outsideContainer = createOutsideContainer({
     document,
     element,
     style: trimStyle(outsideStyle),
   });
-  
+
   const shadow = createShadow(outsideContainer);
-  
+
   const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle) });
-  
+
   if (typeof content === 'function') {
     content = content(insideContainer);
   }
-  
+
   ReactDOM__default['default'].render(content, insideContainer);
 
-  return { content, unmount }
+  return { content, unmount: () => unmount(element) }
 }
 
 exports.ReactShadowDOM = ReactShadowDOM;

@@ -1,5 +1,4 @@
 function createShadow(container) {
-  
   let shadow
 
   if (container.shadowRoot) {
@@ -11,6 +10,4 @@ function createShadow(container) {
   return shadow
 }
 
-export {
-  createShadow
-}
+export { createShadow }
