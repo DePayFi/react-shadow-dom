@@ -1,11 +1,9 @@
 {
   "name": "depay-react-shadow-dom",
   "moduleName": "ReactShadowDOM",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "A library to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
-  "main": "./dist/umd/index.js",
-  "module": "./dist/umd/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
   "files": [
     "dist"
   ],
@@ -15,7 +13,7 @@
     "lint:fix": "eslint \"src/**/*.{js,ts,tsx}\" --fix",
     "format": "prettier src --write",
     "prepublishOnly": "yarn build",
-    "start": "rollup -c rollup.serve.config.js -w",
+    "demo": "rollup -c rollup.demo.config.js -w",
     "test:units": "jest --no-cache",
     "test:integration": "yarn cypress run",
     "test:cov": "jest --coverage",
@@ -49,12 +47,10 @@
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
-    "@types/node": "^14.14.12",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.9.0",
-    "@typescript-eslint/parser": "^4.9.0",
-    "awesome-typescript-loader": "^5.2.1",
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-replace": "^2.4.2",
+    "@rollup/plugin-sucrase": "^3.1.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "babel-preset-env": "^1.7.0",
@@ -74,11 +70,8 @@
     "react-dom": "^17",
     "react-test-renderer": "^17.0.1",
     "react-testing-library": "^8.0.1",
-    "rollup": "^2.34.2",
+    "rollup": "^2.52.8",
     "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-serve": "^1.1.0",
-    "rollup-plugin-typescript2": "^0.29.0",
-    "ts-jest": "^26.4.4",
-    "typescript": "^4.1.2"
+    "rollup-plugin-serve": "^1.1.0"
   }
 }

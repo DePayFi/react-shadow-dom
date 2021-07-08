@@ -57,13 +57,26 @@ insideStyle: `
 
 wich allows you to style all elements and classes within the shadowRoot.
 
+### unmount
+
+In order to completly unmount everything (removing containers and unmounting React components),
+the `ReactShadowDOM` function returns an object containing an `unmount` function:
+
+```javascript
+
+let { unmount } = ReactShadowDOM(...)
+
+unmount()
+
+```
+
 ## Development
 
 ### Get started
 
 ```
 yarn install
-yarn start
+yarn demo
 ```
 
 ### Run tests

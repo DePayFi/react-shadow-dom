@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ReactShadowDOM from 'src'
+import { ReactShadowDOM } from '../../src'
 
 describe('ReactShadowDOM', () => {
   
@@ -158,4 +158,23 @@ describe('ReactShadowDOM', () => {
       })
     })
   })  
+
+  it('allows to unmount the created elements', () => {
+  
+    cy.visit('cypress/test.html').then((contentWindow) => {
+      cy.document().then((document) => {
+
+        let { unmount } = ReactShadowDOM({
+          document,
+          element: document.body,
+          content: React.createElement('h1', {}, 'I have been rendered into a shadow dom!')
+        })
+        
+        cy.get('.ReactShadowDOMOutsideContainer').should('exist').then(()=>{
+          unmount()
+          cy.get('.ReactShadowDOMOutsideContainer').should('not.exist')
+        })
+      })
+    })
+  })
 })
