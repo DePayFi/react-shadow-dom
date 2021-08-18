@@ -64,7 +64,6 @@
       if (shadowRoot) {
         const insideContainer = shadowRoot.childNodes[0];
         if (insideContainer) {
-          console.log('insideContainer', insideContainer);
           ReactDOM__default['default'].unmountComponentAtNode(insideContainer);
         }
       }
