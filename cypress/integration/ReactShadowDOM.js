@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { ReactShadowDOM } from '../../src'
 
@@ -159,7 +159,7 @@ describe('ReactShadowDOM', () => {
     })
   })  
 
-  it('allows to unmount the created elements', () => {
+  it('removes the shadow dom outside container on unmount', () => {
   
     cy.visit('cypress/test.html').then((contentWindow) => {
       cy.document().then((document) => {
@@ -173,6 +173,48 @@ describe('ReactShadowDOM', () => {
         cy.get('.ReactShadowDOMOutsideContainer').should('exist').then(()=>{
           unmount()
           cy.get('.ReactShadowDOMOutsideContainer').should('not.exist')
+        })
+      })
+    })
+  })
+
+  it('correctly unmounts nested components', () => {
+
+    let intervalsCounted = 0
+
+    let TestComponent = ()=>{
+      
+      useEffect(()=>{
+        let interval = setInterval(()=>{
+          intervalsCounted = intervalsCounted+1
+        }, 3000)
+        return ()=>{
+          clearInterval(interval) 
+        }
+      }, [])
+
+      return(
+        <div>
+          Im a test component
+        </div>
+      )
+    }
+  
+    cy.visit('cypress/test.html').then((contentWindow) => {
+      cy.document().then((document) => {
+
+        let { unmount } = ReactShadowDOM({
+          document,
+          element: document.body,
+          insideStyle: "body { background: 'red'; }",
+          content: React.createElement(TestComponent)
+        })
+        
+        cy.get('.ReactShadowDOMOutsideContainer').should('exist').then(()=>{
+          unmount()
+          cy.wait(5000).then(()=>{
+            expect(intervalsCounted).to.eq(0)
+          })
         })
       })
     })

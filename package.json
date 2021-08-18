@@ -1,7 +1,7 @@
 {
   "name": "depay-react-shadow-dom",
   "moduleName": "ReactShadowDOM",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A library to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
   "main": "./dist/cjs/index.js",
   "files": [
@@ -18,6 +18,8 @@
     "test:integration": "yarn cypress run",
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch --no-cache",
+    "test:cypress": "yarn cypress run",
+    "test:cypress:debug": "yarn cypress run --headed --no-exit",
     "test": "yarn test:integration"
   },
   "repository": "git@github.com:DePayFi/depay-react-shadow-dom.git",
