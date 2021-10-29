@@ -26,13 +26,15 @@
   }
 
   const outsideContainerClass = 'ReactShadowDOMOutsideContainer';
+  let currentContainer;
 
   function getOutsideContainer(element) {
-    return element.getElementsByClassName(outsideContainerClass)[0]
+    return currentContainer
   }
 
   function createOutsideContainer({ document, element, style }) {
     const container = document.createElement('div');
+    currentContainer = container;
     container.setAttribute('class', outsideContainerClass);
     container.setAttribute('style', style);
     element.appendChild(container);
@@ -56,7 +58,7 @@
   }
 
   function unmount(element) {
-    const outsideContainer = getOutsideContainer(element);
+    const outsideContainer = getOutsideContainer();
 
     if (outsideContainer && outsideContainer.shadowRoot) {
       const shadowRoot = outsideContainer.shadowRoot;
@@ -73,7 +75,7 @@
   }
 
   function ReactShadowDOM({ document, element, content, outsideStyle = '', insideStyle = '' }) {
-    unmount(element);
+    unmount();
 
     const outsideContainer = createOutsideContainer({
       document,
@@ -91,7 +93,7 @@
 
     ReactDOM__default['default'].render(content, insideContainer);
 
-    return { content, unmount: () => unmount(element) }
+    return { content, unmount: () => unmount() }
   }
 
   exports.ReactShadowDOM = ReactShadowDOM;
