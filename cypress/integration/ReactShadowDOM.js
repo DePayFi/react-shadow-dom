@@ -15,7 +15,8 @@ describe('ReactShadowDOM', () => {
           content: React.createElement('h1', {}, 'I have been rendered into a shadow dom!')
         })
         
-        cy.get('.ReactShadowDOMOutsideContainer').should(element => {
+        cy.get('.ReactShadowDOMoutsideContainer').should(element => {
+          console.log('element', element.get())
           const [container] = element.get()
           expect(
             container.shadowRoot.querySelector('.ReactShadowDOMInsideContainer').querySelector('h1').innerHTML
@@ -54,7 +55,7 @@ describe('ReactShadowDOM', () => {
     })
   })
 
-  it('renders content a shadow dom only once into the same element', () => {
+  it('allows to render shadow dom content into the same element multiple times (e.g. body)', () => {
   
     cy.visit('cypress/test.html').then((contentWindow) => {
       cy.document().then((document) => {
@@ -71,12 +72,12 @@ describe('ReactShadowDOM', () => {
           content: React.createElement('h1', {}, 'I have been rendered into a shadow dom!')
         })
         
-        cy.get('.ReactShadowDOMOutsideContainer').should('have.length', 1)
+        cy.get('.ReactShadowDOMOutsideContainer').should('have.length', 2)
       })
     })
   })
 
-  it('makes sure to unmount react components when cleaning up duplicates', () => {
+  it('makes sure to unmount react components properly if calling unmount', () => {
   
     cy.visit('cypress/test.html').then((contentWindow) => {
       cy.document().then((document) => {
@@ -93,7 +94,7 @@ describe('ReactShadowDOM', () => {
           }
         }
 
-        ReactShadowDOM({
+        let {unmount} = ReactShadowDOM({
           document,
           element: document.body,
           content: React.createElement(TestComponent, {}, null)
@@ -104,6 +105,8 @@ describe('ReactShadowDOM', () => {
           element: document.body,
           content: React.createElement(TestComponent, {}, null)
         })
+
+        unmount()
 
         cy.get('.ReactShadowDOMOutsideContainer').should(element => {
           expect(componentDidUnmount).to.equal(true)
@@ -159,7 +162,7 @@ describe('ReactShadowDOM', () => {
     })
   })  
 
-  it.only('removes the shadow dom outside container on unmount', () => {
+  it('removes the shadow dom outside container on unmount', () => {
   
     cy.visit('cypress/test.html').then((contentWindow) => {
       cy.document().then((document) => {
@@ -172,8 +175,7 @@ describe('ReactShadowDOM', () => {
         
         cy.get('.ReactShadowDOMOutsideContainer').should('exist').then(()=>{
           unmount()
-          cy.get('.ReactShadowDOMOutsideContainer.therebefore').should('exist')
-          cy.get('.ReactShadowDOMOutsideContainer:not(.therebefore)').should('not.exist')
+          cy.get('.ReactShadowDOMOutsideContainer').should('not.exist')
         })
       })
     })

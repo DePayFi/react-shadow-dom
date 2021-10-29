@@ -1,8 +1,6 @@
 import ReactDOM from 'react-dom'
-import { getOutsideContainer } from './outsideContainer'
 
-function unmount(element) {
-  const outsideContainer = getOutsideContainer(element)
+function unmount(outsideContainer) {
 
   if (outsideContainer && outsideContainer.shadowRoot) {
     const shadowRoot = outsideContainer.shadowRoot

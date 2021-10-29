@@ -11,9 +11,11 @@
   </head>
   <body>
     <div class="ReactShadowDOM"></div>
+    <div class="ReactShadowDOM2"></div>
     <script>
       const ReactShadowDOM = window.ReactShadowDOM;
       const element = document.getElementsByClassName('ReactShadowDOM')[0];
+      const element2 = document.getElementsByClassName('ReactShadowDOM2')[0];
       const content = React.createElement('h1', {}, "I'm in a ShadowDOM");
       const outsideStyle = `
         border: 1px solid red;
@@ -25,9 +27,17 @@
           color: white;
         }
       `
-      ReactShadowDOM({
+      ReactShadowDOM.ReactShadowDOM({
         document,
         element,
+        content,
+        outsideStyle: outsideStyle,
+        insideStyle: insideStyle
+      });
+
+      ReactShadowDOM.ReactShadowDOM({
+        document,
+        element: element2,
         content,
         outsideStyle: outsideStyle,
         insideStyle: insideStyle

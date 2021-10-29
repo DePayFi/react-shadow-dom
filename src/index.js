@@ -7,8 +7,6 @@ import { trimStyle } from './trimStyle'
 import { unmount } from './unmount'
 
 function ReactShadowDOM({ document, element, content, outsideStyle = '', insideStyle = '' }) {
-  unmount(element)
-
   const outsideContainer = createOutsideContainer({
     document,
     element,
@@ -25,7 +23,7 @@ function ReactShadowDOM({ document, element, content, outsideStyle = '', insideS
 
   ReactDOM.render(content, insideContainer)
 
-  return { content, unmount: () => unmount(element) }
+  return { content, unmount: () => unmount(outsideContainer) }
 }
 
 export { ReactShadowDOM }
