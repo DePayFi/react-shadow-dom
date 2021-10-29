@@ -1,7 +1,7 @@
 {
   "name": "depay-react-shadow-dom",
   "moduleName": "ReactShadowDOM",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A library to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
   "main": "./dist/cjs/index.js",
   "files": [

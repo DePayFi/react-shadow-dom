@@ -159,7 +159,7 @@ describe('ReactShadowDOM', () => {
     })
   })  
 
-  it('removes the shadow dom outside container on unmount', () => {
+  it.only('removes the shadow dom outside container on unmount', () => {
   
     cy.visit('cypress/test.html').then((contentWindow) => {
       cy.document().then((document) => {
@@ -172,7 +172,8 @@ describe('ReactShadowDOM', () => {
         
         cy.get('.ReactShadowDOMOutsideContainer').should('exist').then(()=>{
           unmount()
-          cy.get('.ReactShadowDOMOutsideContainer').should('not.exist')
+          cy.get('.ReactShadowDOMOutsideContainer.therebefore').should('exist')
+          cy.get('.ReactShadowDOMOutsideContainer:not(.therebefore)').should('not.exist')
         })
       })
     })
