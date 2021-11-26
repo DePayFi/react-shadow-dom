@@ -1,28 +1,24 @@
 {
-  "name": "depay-react-shadow-dom",
+  "name": "@depay/react-shadow-dom",
   "moduleName": "ReactShadowDOM",
-  "version": "2.0.4",
+  "version": "3.0.0",
   "description": "A library to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
   "main": "./dist/cjs/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf dist && rollup -c",
-    "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
-    "lint:fix": "eslint \"src/**/*.{js,ts,tsx}\" --fix",
-    "format": "prettier src --write",
+    "build": "rm -rf dist && rollup -c rollup.module.config.js",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
     "prepublishOnly": "yarn build",
-    "demo": "rollup -c rollup.demo.config.js -w",
-    "test:units": "jest --no-cache",
-    "test:integration": "yarn cypress run",
-    "test:cov": "jest --coverage",
-    "test:watch": "jest --watch --no-cache",
+    "dev": "rollup -c rollup.dev.config.js -w",
     "test:cypress": "yarn cypress run",
     "test:cypress:debug": "yarn cypress run --headed --no-exit",
+    "test:integration": "yarn cypress run",
     "test": "yarn test:integration"
   },
-  "repository": "git@github.com:DePayFi/depay-react-shadow-dom.git",
+  "repository": "git@github.com:DePayFi/react-shadow-dom.git",
   "keywords": [
     "react",
     "shadow dom",
@@ -33,9 +29,9 @@
   "author": "depay.fi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DePayFi/depay-react-shadow-dom/issues"
+    "url": "https://github.com/DePayFi/react-shadow-dom/issues"
   },
-  "homepage": "https://github.com/DePayFi/depay-react-shadow-dom#readme",
+  "homepage": "https://github.com/DePayFi/react-shadow-dom#readme",
   "private": false,
   "dependencies": {},
   "peerDependencies": {

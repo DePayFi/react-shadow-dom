@@ -3,6 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var ReactDOM = require('react-dom');
+require('react');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -52,7 +53,6 @@ function trimStyle(style) {
 }
 
 function unmount(outsideContainer) {
-
   if (outsideContainer && outsideContainer.shadowRoot) {
     const shadowRoot = outsideContainer.shadowRoot;
 

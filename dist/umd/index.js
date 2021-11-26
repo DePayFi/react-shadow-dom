@@ -1,6 +1,6 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react-dom')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react-dom'], factory) :
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react-dom'), require('react')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react-dom', 'react'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.ReactShadowDOM = {}, global.ReactDOM));
 }(this, (function (exports, ReactDOM) { 'use strict';
 
@@ -52,7 +52,6 @@
   }
 
   function unmount(outsideContainer) {
-
     if (outsideContainer && outsideContainer.shadowRoot) {
       const shadowRoot = outsideContainer.shadowRoot;
 

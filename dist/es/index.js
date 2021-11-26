@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import 'react';
 
 const insideContainerClass = 'ReactShadowDOMInsideContainer';
 
@@ -44,7 +45,6 @@ function trimStyle(style) {
 }
 
 function unmount(outsideContainer) {
-
   if (outsideContainer && outsideContainer.shadowRoot) {
     const shadowRoot = outsideContainer.shadowRoot;
 

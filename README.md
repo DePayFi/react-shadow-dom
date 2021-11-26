@@ -1,11 +1,11 @@
 ## Quick Start
 
 ```
-yarn add depay-react-shadow-dom
+yarn add @depay/react-shadow-dom
 ```
 
 ```
-import { ReactShadowDOM } from 'depay-react-shadow-dom';
+import { ReactShadowDOM } from '@depay/react-shadow-dom';
 ```
 
 ```
