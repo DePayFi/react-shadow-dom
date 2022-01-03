@@ -1,9 +1,10 @@
 {
   "name": "@depay/react-shadow-dom",
   "moduleName": "ReactShadowDOM",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A library to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
-  "main": "./dist/cjs/index.js",
+  "main": "./dist/umd/index.js",
+  "module": "./dist/esm/index.js",
   "files": [
     "dist"
   ],
