@@ -16,10 +16,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
 
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
-      
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
