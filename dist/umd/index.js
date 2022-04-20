@@ -66,7 +66,14 @@
     }
   }
 
-  function ReactShadowDOM({ document, element, content, outsideStyle = '', insideStyle = '', insideClasses = [] }) {
+  function ReactShadowDOM({
+    document,
+    element,
+    content,
+    outsideStyle = '',
+    insideStyle = '',
+    insideClasses = [],
+  }) {
     const outsideContainer = createOutsideContainer({
       document,
       element,
@@ -75,7 +82,12 @@
 
     const shadow = createShadow(outsideContainer);
 
-    const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle), classes: insideClasses });
+    const insideContainer = createInsideContainer({
+      document,
+      shadow,
+      style: trimStyle(insideStyle),
+      classes: insideClasses,
+    });
 
     if (typeof content === 'function') {
       content = content(insideContainer);
