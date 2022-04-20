@@ -6,7 +6,7 @@ import { ReactElement } from 'react'
 import { trimStyle } from './trimStyle'
 import { unmount } from './unmount'
 
-function ReactShadowDOM({ document, element, content, outsideStyle = '', insideStyle = '' }) {
+function ReactShadowDOM({ document, element, content, outsideStyle = '', insideStyle = '', insideClasses = [] }) {
   const outsideContainer = createOutsideContainer({
     document,
     element,
@@ -15,7 +15,7 @@ function ReactShadowDOM({ document, element, content, outsideStyle = '', insideS
 
   const shadow = createShadow(outsideContainer)
 
-  const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle) })
+  const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle), classes: insideClasses })
 
   if (typeof content === 'function') {
     content = content(insideContainer)

@@ -1,8 +1,8 @@
 const insideContainerClass = 'ReactShadowDOMInsideContainer'
 
-function createInsideContainer({ document, shadow, style }) {
+function createInsideContainer({ document, shadow, style, classes = [] }) {
   const container = document.createElement('div')
-  container.setAttribute('class', insideContainerClass)
+  container.setAttribute('class', [insideContainerClass].concat(classes).join(' '))
   shadow.appendChild(container)
 
   if (style && style.length) {

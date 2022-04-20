@@ -27,7 +27,7 @@ target element (`element`) within a given document (`document`) while also apply
 
 You can either pas a ReactElement to `content` or a function. In case of a `function` that function will be call with the `insideContainer` as an argument and it's expected to return a ReactElement.
 
-### Styles
+### styles
 
 While `outsideStyle` is applied to the outside container directly:
 ```
@@ -56,6 +56,17 @@ insideStyle: `
 ```
 
 wich allows you to style all elements and classes within the shadowRoot.
+
+### classes
+
+`insideClasses` sets classes on inside container:
+```
+insideClasses: ['contained', 'another-class']
+```
+```
+#shadow-root
+  <div class="ReactShadowDOMInsideContainer contained another-class"><h1>I'm in a ShadowDOM</h1></div>
+```
 
 ### unmount
 

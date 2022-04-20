@@ -3,9 +3,9 @@ import 'react';
 
 const insideContainerClass = 'ReactShadowDOMInsideContainer';
 
-function createInsideContainer({ document, shadow, style }) {
+function createInsideContainer({ document, shadow, style, classes = [] }) {
   const container = document.createElement('div');
-  container.setAttribute('class', insideContainerClass);
+  container.setAttribute('class', [insideContainerClass].concat(classes).join(' '));
   shadow.appendChild(container);
 
   if (style && style.length) {
@@ -59,7 +59,7 @@ function unmount(outsideContainer) {
   }
 }
 
-function ReactShadowDOM({ document, element, content, outsideStyle = '', insideStyle = '' }) {
+function ReactShadowDOM({ document, element, content, outsideStyle = '', insideStyle = '', insideClasses = [] }) {
   const outsideContainer = createOutsideContainer({
     document,
     element,
@@ -68,7 +68,7 @@ function ReactShadowDOM({ document, element, content, outsideStyle = '', insideS
 
   const shadow = createShadow(outsideContainer);
 
-  const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle) });
+  const insideContainer = createInsideContainer({ document, shadow, style: trimStyle(insideStyle), classes: insideClasses });
 
   if (typeof content === 'function') {
     content = content(insideContainer);
