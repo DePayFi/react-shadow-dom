@@ -1,8 +1,7 @@
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { createInsideContainer } from './insideContainer'
 import { createOutsideContainer } from './outsideContainer'
 import { createShadow } from './shadow'
-import { ReactElement } from 'react'
 import { trimStyle } from './trimStyle'
 import { unmount } from './unmount'
 
@@ -33,9 +32,10 @@ function ReactShadowDOM({
     content = content(insideContainer)
   }
 
-  ReactDOM.render(content, insideContainer)
+  const insideRoot = createRoot(insideContainer)
+  insideRoot.render(content)
 
-  return { content, unmount: () => unmount(outsideContainer) }
+  return { content, unmount: () => unmount({ insideRoot, outsideContainer }) }
 }
 
 export { ReactShadowDOM }

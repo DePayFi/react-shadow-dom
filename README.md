@@ -96,6 +96,12 @@ yarn demo
 yarn test:integration
 ```
 
+### Debug tests
+
+```
+yarn test:cypress:debug 'cypress/integration/ReactShadowDOM.js'
+```
+
 ### Release
 
 ```

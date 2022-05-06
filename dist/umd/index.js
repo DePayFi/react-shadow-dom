@@ -1,12 +1,19 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react-dom'), require('react')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react-dom', 'react'], factory) :
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react-dom')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react-dom'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.ReactShadowDOM = {}, global.ReactDOM));
-}(this, (function (exports, ReactDOM) { 'use strict';
+})(this, (function (exports, require$$0) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-  var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
+  var require$$0__default = /*#__PURE__*/_interopDefaultLegacy(require$$0);
+
+  var createRoot;
+
+  var m = require$$0__default["default"];
+  {
+    createRoot = m.createRoot;
+  }
 
   const insideContainerClass = 'ReactShadowDOMInsideContainer';
 
@@ -51,19 +58,9 @@
     return style.replace(/\s*[\r\n]\s*/g, '')
   }
 
-  function unmount(outsideContainer) {
-    if (outsideContainer && outsideContainer.shadowRoot) {
-      const shadowRoot = outsideContainer.shadowRoot;
-
-      if (shadowRoot) {
-        const insideContainer = shadowRoot.childNodes[0];
-        if (insideContainer) {
-          ReactDOM__default['default'].unmountComponentAtNode(insideContainer);
-        }
-      }
-
-      outsideContainer.remove();
-    }
+  function unmount({ insideRoot, outsideContainer }) {
+    insideRoot.unmount();
+    outsideContainer.remove();
   }
 
   function ReactShadowDOM({
@@ -93,13 +90,14 @@
       content = content(insideContainer);
     }
 
-    ReactDOM__default['default'].render(content, insideContainer);
+    const insideRoot = createRoot(insideContainer);
+    insideRoot.render(content);
 
-    return { content, unmount: () => unmount(outsideContainer) }
+    return { content, unmount: () => unmount({ insideRoot, outsideContainer }) }
   }
 
   exports.ReactShadowDOM = ReactShadowDOM;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));

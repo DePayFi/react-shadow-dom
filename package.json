@@ -1,7 +1,7 @@
 {
   "name": "@depay/react-shadow-dom",
   "moduleName": "ReactShadowDOM",
-  "version": "4.2.0",
+  "version": "6.0.0",
   "description": "A library to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
   "main": "./dist/umd/index.js",
   "module": "./dist/esm/index.js",
@@ -36,11 +36,11 @@
   "private": false,
   "dependencies": {},
   "peerDependencies": {
-    "react": "^17",
-    "react-dom": "^17"
+    "react": "^18",
+    "react-dom": "^18"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=16"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -65,8 +65,8 @@
     "jest": "^26.6.3",
     "jest-dom": "^4.0.0",
     "prettier": "^2.2.1",
-    "react": "^17.0.1",
-    "react-dom": "^17",
+    "react": "^18",
+    "react-dom": "^18",
     "react-test-renderer": "^17.0.1",
     "react-testing-library": "^8.0.1",
     "rollup": "^2.52.8",

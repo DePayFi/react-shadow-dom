@@ -82,34 +82,28 @@ describe('ReactShadowDOM', () => {
     cy.visit('cypress/test.html').then((contentWindow) => {
       cy.document().then((document) => {
         let componentDidUnmount = false
-        
-        class TestComponent extends React.Component {
-          
-          componentWillUnmount() {
-            componentDidUnmount = true
-          }
 
-          render() {
-            return(React.createElement('h1', {}, 'testcomponent'))
-          }
+        let TestComponent = (props)=> {
+          console.log("component");
+          React.useEffect(() => {
+            return () => {
+              componentDidUnmount = true
+            };
+          }, [])
+          return(React.createElement('h1', {}, 'testcomponent'))
         }
-
+        
         let {unmount} = ReactShadowDOM({
           document,
           element: document.body,
           content: React.createElement(TestComponent, {}, null)
         })
-
-        ReactShadowDOM({
-          document,
-          element: document.body,
-          content: React.createElement(TestComponent, {}, null)
-        })
-
-        unmount()
-
-        cy.get('.ReactShadowDOMOutsideContainer').should(element => {
-          expect(componentDidUnmount).to.equal(true)
+        
+        cy.wait(1000).then(()=>{
+          unmount()
+          cy.wait(1000).then(()=>{
+            expect(componentDidUnmount).to.equal(true)
+          })
         })
       })
     })

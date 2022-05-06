@@ -1,5 +1,11 @@
-import ReactDOM from 'react-dom';
-import 'react';
+import require$$0 from 'react-dom';
+
+var createRoot;
+
+var m = require$$0;
+{
+  createRoot = m.createRoot;
+}
 
 const insideContainerClass = 'ReactShadowDOMInsideContainer';
 
@@ -44,19 +50,9 @@ function trimStyle(style) {
   return style.replace(/\s*[\r\n]\s*/g, '')
 }
 
-function unmount(outsideContainer) {
-  if (outsideContainer && outsideContainer.shadowRoot) {
-    const shadowRoot = outsideContainer.shadowRoot;
-
-    if (shadowRoot) {
-      const insideContainer = shadowRoot.childNodes[0];
-      if (insideContainer) {
-        ReactDOM.unmountComponentAtNode(insideContainer);
-      }
-    }
-
-    outsideContainer.remove();
-  }
+function unmount({ insideRoot, outsideContainer }) {
+  insideRoot.unmount();
+  outsideContainer.remove();
 }
 
 function ReactShadowDOM({
@@ -86,9 +82,10 @@ function ReactShadowDOM({
     content = content(insideContainer);
   }
 
-  ReactDOM.render(content, insideContainer);
+  const insideRoot = createRoot(insideContainer);
+  insideRoot.render(content);
 
-  return { content, unmount: () => unmount(outsideContainer) }
+  return { content, unmount: () => unmount({ insideRoot, outsideContainer }) }
 }
 
 export { ReactShadowDOM };
