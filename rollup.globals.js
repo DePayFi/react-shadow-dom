@@ -1,3 +1,3 @@
 export default {
-  'react-dom': 'ReactDOM',
+  'react-dom': 'ReactDOM'
 }

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
 import { ReactShadowDOM } from '../../src'
 
 describe('ReactShadowDOM', () => {
