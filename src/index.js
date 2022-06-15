@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client'
+import * as ReactDOMClient from 'react-dom/client'
 import { createInsideContainer } from './insideContainer'
 import { createOutsideContainer } from './outsideContainer'
 import { createShadow } from './shadow'
@@ -32,7 +32,7 @@ function ReactShadowDOM({
     content = content(insideContainer)
   }
 
-  const insideRoot = createRoot(insideContainer)
+  const insideRoot = ReactDOMClient.createRoot(insideContainer)
   insideRoot.render(content)
 
   return { content, unmount: () => unmount({ insideRoot, outsideContainer }) }
