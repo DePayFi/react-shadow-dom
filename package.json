@@ -1,7 +1,7 @@
 {
   "name": "@depay/react-shadow-dom",
   "moduleName": "ReactShadowDOM",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "A library to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
   "main": "./dist/umd/index.js",
   "module": "./dist/esm/index.js",
@@ -32,7 +32,7 @@
   "bugs": {
     "url": "https://github.com/DePayFi/react-shadow-dom/issues"
   },
-  "homepage": "https://github.com/DePayFi/react-shadow-dom#readme",
+  "homepage": "https://depay.com",
   "private": false,
   "dependencies": {},
   "peerDependencies": {
