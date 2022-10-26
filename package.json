@@ -1,7 +1,7 @@
 {
   "name": "@depay/react-shadow-dom",
   "moduleName": "ReactShadowDOM",
-  "version": "5.0.4",
+  "version": "5.0.5",
   "description": "A library to easily render react compatible shadow DOMs for web components with individual styling for inside and outside.",
   "main": "./dist/umd/index.js",
   "module": "./dist/esm/index.js",
@@ -12,7 +12,6 @@
     "build": "rm -rf dist && rollup -c rollup.module.config.js",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
-    "prepublishOnly": "yarn build",
     "dev": "rollup -c rollup.dev.config.js -w",
     "test:cypress": "yarn cypress run",
     "test:cypress:debug": "yarn cypress run --headed --no-exit",
